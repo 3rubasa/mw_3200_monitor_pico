@@ -10,6 +10,7 @@ set(APP_NAME mw3200)
 set(PICO_BOARD pico_w)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
+set(PICO_CXX_ENABLE_EXCEPTIONS 1)
 
 if (PICO_SDK_VERSION_STRING VERSION_LESS "1.3.0")
     message(FATAL_ERROR "Raspberry Pi Pico SDK version 1.3.0 (or later) required. Your version is ${PICO_SDK_VERSION_STRING}")
@@ -45,12 +46,16 @@ if (PICO_CYW43_SUPPORTED) # set by PICO_BOARD=pico_w
         set(WIFI_PASSWORD "${WIFI_PASSWORD}" CACHE INTERNAL "WiFi password for examples")
 
         add_executable(${APP_NAME}
-            main.c
+            main.cpp
+            i2c.cpp
+            conversions.cpp
+            device.cpp
         )
 
         target_link_libraries(${APP_NAME}
             pico_stdlib              # for core functionality
             pico_cyw43_arch_none     # we need Wifi to access the GPIO, but we don't need anything else
+            hardware_i2c
         )
 
         # create map/bin/hex file etc.
