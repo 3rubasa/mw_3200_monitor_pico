@@ -3,62 +3,62 @@
 #include "constants.h"
 #include "i2c.h"
 
-float readVin() {
+float Device::readVin() {
     return lin11_to_float(ReadWord(READ_VIN));
 }
 
-float readVout() {
+float Device::readVout() {
     return lin16_to_float(ReadWord(READ_VOUT), (unsigned int)(VOUT_MODE_VAL & 0x1F));
 }
 
-float readIout() {
+float Device::readIout() {
     return lin11_to_float(ReadWord(READ_IOUT));
 }
 
-float readTemp1() {
+float Device::readTemp1() {
     return lin11_to_float(ReadWord(READ_TEMPERATURE_1));
 }
 
-float readFanSpeed1() {
+float Device::readFanSpeed1() {
     return lin11_to_float(ReadWord(READ_FAN_SPEED_1));
 }
 
-float readFanSpeed2() {
+float Device::readFanSpeed2() {
     return lin11_to_float(ReadWord(READ_FAN_SPEED_2));
 }
 
-uint16_t readStatusWord() {
+uint16_t Device::readStatusWord() {
     return ReadWord(STATUS_WORD);
 }
 
-uint8_t readStatusVout() {
+uint8_t Device::readStatusVout() {
     return ReadByte(STATUS_VOUT);
 }
 
-uint8_t readStatusIout() {
+uint8_t Device::readStatusIout() {
     return ReadByte(STATUS_IOUT);
 }
 
-uint8_t readStatusInput() {
+uint8_t Device::readStatusInput() {
     return ReadByte(STATUS_INPUT);
 }
 
-uint8_t readStatusTemp() {
+uint8_t Device::readStatusTemp() {
     return ReadByte(STATUS_TEMP);
 }
 
-uint8_t readStatusCml() {
+uint8_t Device::readStatusCml() {
     return ReadByte(STATUS_CML);
 }
 
-uint8_t readStatusMfrSpecific() {
+uint8_t Device::readStatusMfrSpecific() {
     return ReadByte(STATUS_MFR_SPECIFIC);
 }
 
-uint8_t readStatusFans_1_2() {
+uint8_t Device::readStatusFans_1_2() {
     return ReadByte(STATUS_FANS_1_2);
 }
 
-float readIoutOvercurrent() {
+float Device::readIoutOvercurrent() {
     return lin11_to_float(ReadWord(IOUT_OC_FAULT_LIMIT));
 }

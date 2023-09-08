@@ -22,6 +22,8 @@ pico_sdk_init()
 add_compile_options(-Wall
         -Wno-format          # int != int32_t as far as the compiler is concerned because gcc has int32_t as long int
         -Wno-unused-function # we have some for the docs that aren't called
+        -Wno-maybe-uninitialized
+        -Wno-unused-value
         )
 if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
     add_compile_options(-Wno-maybe-uninitialized)
@@ -32,30 +34,31 @@ if (PICO_CYW43_SUPPORTED) # set by PICO_BOARD=pico_w
         message("Skipping Pico W examples as support is not available")
     else()
 
-        if (DEFINED ENV{WIFI_SSID} AND (NOT WIFI_SSID))
-            set(WIFI_SSID $ENV{WIFI_SSID})
-            message("Using WIFI_SSID from environment ('${WIFI_SSID}')")
-        endif()
-
-        if (DEFINED ENV{WIFI_PASSWORD} AND (NOT WIFI_PASSWORD))
-            set(WIFI_PASSWORD $ENV{WIFI_PASSWORD})
-            message("Using WIFI_PASSWORD from environment")
-        endif()
-
-        set(WIFI_SSID "${WIFI_SSID}" CACHE INTERNAL "WiFi SSID for examples")
-        set(WIFI_PASSWORD "${WIFI_PASSWORD}" CACHE INTERNAL "WiFi password for examples")
+    message("Running makefsdata python script")
+    
+    execute_process(COMMAND
+        py makefsdata.py
+        WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
+    )
 
         add_executable(${APP_NAME}
             main.cpp
             i2c.cpp
             conversions.cpp
             device.cpp
+            ssi.cpp
         )
 
         target_link_libraries(${APP_NAME}
             pico_stdlib              # for core functionality
-            pico_cyw43_arch_none     # we need Wifi to access the GPIO, but we don't need anything else
             hardware_i2c
+            hardware_adc
+            pico_cyw43_arch_lwip_threadsafe_background
+            pico_lwip_http
+        )
+
+        target_include_directories(${APP_NAME} PRIVATE
+        ${CMAKE_CURRENT_LIST_DIR}
         )
 
         # create map/bin/hex file etc.

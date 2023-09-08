@@ -7,6 +7,7 @@
 #include "hardware/i2c.h"
 #include "constants.h"
 #include "conversions.h"
+#include <sstream>
 
 #define I2C_BUS i2c0
 #define DEVICE_ADDRESS 0x47
@@ -27,22 +28,24 @@ uint8_t ReadByte(uint8_t command) {
     int ret = i2c_write_blocking (I2C_BUS, DEVICE_ADDRESS, &command, sizeof(command), true);
     //printf("Writing result: %d \n", ret);
     if (ret < (int)sizeof(command)) {
-        std::cout << "Writing command 0x" << std::hex << command << 
+        std::stringstream errss;
+        errss << "Writing command 0x" << std::hex << (int)command << 
             " to device 0x" << std::hex << DEVICE_ADDRESS << 
             " on bus 0x" << std::hex << I2C_BUS->hw << 
             " failed with ret value = " << ret << std::endl;
-
-        throw std::runtime_error("Writing command to i2c slave failed!");
+        std::cout << errss.str();
+        throw std::runtime_error(errss.str().c_str());
     }
 
     ret = i2c_read_blocking (I2C_BUS, DEVICE_ADDRESS, (uint8_t*)&result, sizeof(result), false);
     if (ret < (int)sizeof(result)) {
-        std::cout << "Reading " << sizeof(result) << " bytes response to command 0x" << std::hex << command << 
+        std::stringstream errss;
+        errss << "Reading " << sizeof(result) << " bytes response to command 0x" << std::hex << (int)command << 
             " from device 0x" << std::hex << DEVICE_ADDRESS << 
             " on bus 0x" << std::hex << I2C_BUS->hw << 
             " failed with ret value = " << ret << std::endl;
-
-        throw std::runtime_error("Reading response to command from i2c slave failed!");
+        std::cout << errss.str();
+        throw std::runtime_error(errss.str().c_str());
     }
 
     //printf("RESULT=%d", result);
@@ -57,24 +60,28 @@ uint16_t ReadWord(uint8_t command) {
 
     int ret = i2c_write_blocking (I2C_BUS, DEVICE_ADDRESS, &command, sizeof(command), true);
     if (ret < (int)sizeof(command)) {
-        std::cout << "Writing command 0x" << std::hex << command << 
+        std::stringstream errss;
+        errss << "Writing command 0x" << std::hex << (int)command << 
             " to device 0x" << std::hex << DEVICE_ADDRESS << 
             " on bus 0x" << std::hex << I2C_BUS->hw << 
             " failed with ret value = " << ret << std::endl;
 
-        throw std::runtime_error("Writing command to i2c slave failed!");
+        std::cout << errss.str();
+        throw std::runtime_error(errss.str().c_str());
     }
 
     //printf("Writing result: %d \n", ret);
 
     ret = i2c_read_blocking (I2C_BUS, DEVICE_ADDRESS, (uint8_t*)&result, sizeof(result), false);
     if (ret < (int)sizeof(result)) {
-        std::cout << "Reading " << sizeof(result) << " bytes response to command 0x" << std::hex << command << 
+        std::stringstream errss;
+        errss << "Reading " << sizeof(result) << " bytes response to command 0x" << std::hex << (int)command << 
             " from device 0x" << std::hex << DEVICE_ADDRESS << 
             " on bus 0x" << std::hex << I2C_BUS->hw << 
             " failed with ret value = " << ret << std::endl;
 
-        throw std::runtime_error("Reading response to command from i2c slave failed!");
+        std::cout << errss.str();
+        throw std::runtime_error(errss.str().c_str());
     }
 
     //printf("RESULT=%d", result);
