@@ -74,18 +74,20 @@ int main() {
     
      initialize_i2c();
 
-    //     for (int i = 0; i < 10; i++) {
-    //     printf("Sleeping 10 secs...\n");
-    //     sleep_ms(1000);
-    // }
-
     cyw43_arch_init();
 
     cyw43_arch_enable_sta_mode();
 
     // Connect to the WiFI network - loop until connected
     // WIFI_SSID and WIFI_PASSWORD come from creds.h
-    while(cyw43_arch_wifi_connect_timeout_ms(WIFI_SSID, WIFI_PASSWORD, CYW43_AUTH_WPA2_AES_PSK, 30000) != 0){
+    int err = 0;
+    while((err = cyw43_arch_wifi_connect_timeout_ms(WIFI_SSID, WIFI_PASSWORD, CYW43_AUTH_WPA2_AES_PSK, 30000)) != 0){
+        printf("Error while connecting: %d\n", err);
+        if (err == PICO_ERROR_TIMEOUT) {
+            printf("Probably SSID specified in creds.h %s was not found: \n", WIFI_SSID);
+        } else if (err == PICO_ERROR_BADAUTH) {
+            printf("Probably password specified in creds.h %s is incorrect: \n", WIFI_PASSWORD);
+        }
         printf("Attempting to connect...\n");
     }
     // Print a success message once connected
@@ -99,7 +101,9 @@ int main() {
     ssi_init(std::shared_ptr<IDevice>{new Device{}}); 
     printf("SSI Handler initialised\n");
 
-    while(true);
+    while(true) {
+        sleep_ms(60000);
+    }
     
 //     for (int i = 0; i < 10; i++) {
 //         printf("Sleeping 10 secs...\n");
