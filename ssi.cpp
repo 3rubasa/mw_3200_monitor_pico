@@ -22,135 +22,144 @@ u16_t ssi_handler(int iIndex, char *pcInsert, int iInsertLen, u16_t part, u16_t*
     printf("part=%d\n", part);
     printf("nextpart=%d\n", *next_part);
 
+    struct Param {
+        string name;
+        string val;
+    };
+
     if (part == 0) {
-        unordered_map<string, string> values;
+        vector<Param> values;
         vector<string> errors;
 
+        Param param {"",""};
+
         // readVin()
+        param.name="vin";
         try {
-            values["vin"] += to_string(g_device->readVin());
+            param.val = to_string(g_device->readVin());
+            values.push_back(param);
         } catch (const exception& ex) {
-            values["vin"] += "ERROR";
+            param.val = "ERROR";
             errors.push_back(std::string{"readVin() error: "} + ex.what()); 
         }
-
+        values.push_back(param);
         // readVout()
+        param.name="vout";
         try {
-            values["vout"] += to_string(g_device->readVout());
+            param.val = to_string(g_device->readVout());
         } catch (const exception& ex) {
-            values["vout"] += "ERROR";
+            param.val = "ERROR";
             errors.push_back(std::string{"readVout() error: "} + ex.what()); 
         }
-
         // readIout()
+        param.name="iout";
         try {
-            values["iout"] += to_string(g_device->readIout());
+            param.val = to_string(g_device->readIout());
         } catch (const exception& ex) {
-            values["iout"] += "ERROR";
+            param.val = "ERROR";
             errors.push_back(std::string{"readIout() error: "} + ex.what()); 
         }
-
         // readTemp1()
+        param.name="temp1";
         try {
-            values["temp1"] += to_string(g_device->readTemp1());
+            param.val = to_string(g_device->readTemp1());
         } catch (const exception& ex) {
-            values["temp1"] += "ERROR";
+            param.val = "ERROR";
             errors.push_back(std::string{"readTemp1() error: "} + ex.what()); 
         }
-
         // readFanSpeed1()
+        param.name="fan1";
         try {
-            values["fan1"] += to_string(g_device->readFanSpeed1());
+            param.val = to_string(g_device->readFanSpeed1());
         } catch (const exception& ex) {
-            values["fan1"] += "ERROR";
+            param.val = "ERROR";
             errors.push_back(std::string{"readFanSpeed1() error: "} + ex.what()); 
         }
-        
         // readFanSpeed2()
+        param.name="fan2";
         try {
-            values["fan2"] += to_string(g_device->readFanSpeed2());
+            param.val = to_string(g_device->readFanSpeed2());
         } catch (const exception& ex) {
-            values["fan2"] += "ERROR";
+            param.val = "ERROR";
             errors.push_back(std::string{"readFanSpeed2() error: "} + ex.what()); 
         }
-
-        try {
-            values["status_word"] += to_string(g_device->readStatusWord());
-        } catch (const exception& ex) {
-            values["status_word"] += "ERROR";
-            errors.push_back(std::string{"readStatusWord() error: "} + ex.what()); 
-        }
-
         // readStatusWord() = 0;
+        param.name="status_word";
         try {
-            values["status_word"] += to_string(g_device->readStatusWord());
+            param.val = to_string(g_device->readStatusWord());
         } catch (const exception& ex) {
-            values["status_word"] += "ERROR";
+            param.val = "ERROR";
             errors.push_back(std::string{"readStatusWord() error: "} + ex.what()); 
         }
-
-        
         // readStatusVout() = 0;
+        param.name="status_vout";
         try {
-            values["status_vout"] += to_string(g_device->readStatusVout());
+            param.val = to_string(g_device->readStatusVout());
         } catch (const exception& ex) {
-            values["status_vout"] += "ERROR";
+            param.val = "ERROR";
             errors.push_back(std::string{"readStatusVout() error: "} + ex.what()); 
         }
         // readStatusIout() = 0;
+        param.name="status_iout";
         try {
-            values["status_iout"] += to_string(g_device->readStatusIout());
+            param.val = to_string(g_device->readStatusIout());
         } catch (const exception& ex) {
-            values["status_iout"] += "ERROR";
+            param.val = "ERROR";
             errors.push_back(std::string{"readStatusIout() error: "} + ex.what()); 
         }
         // readStatusInput() = 0;
+        param.name="status_input";
         try {
-            values["status_input"] += to_string(g_device->readStatusInput());
+            param.val = to_string(g_device->readStatusInput());
         } catch (const exception& ex) {
-            values["status_input"] += "ERROR";
+            param.val = "ERROR";
             errors.push_back(std::string{"readStatusInput() error: "} + ex.what()); 
         }
         // readStatusTemp() = 0;
+        param.name="status_temp";
         try {
-            values["status_temp"] += to_string(g_device->readStatusTemp());
+            param.val = to_string(g_device->readStatusTemp());
         } catch (const exception& ex) {
-            values["status_temp"] += "ERROR";
+            param.val = "ERROR";
             errors.push_back(std::string{"readStatusTemp() error: "} + ex.what()); 
         }
         // readStatusCml() = 0;
+        param.name="status_cml";
         try {
-            values["status_cml"] += to_string(g_device->readStatusCml());
+            param.val = to_string(g_device->readStatusCml());
         } catch (const exception& ex) {
-            values["status_cml"] += "ERROR";
+            param.val = "ERROR";
             errors.push_back(std::string{"readStatusCml() error: "} + ex.what()); 
         }
         // readStatusMfrSpecific() = 0;
+        param.name="status_mfr_specific";
         try {
-            values["status_mfr_specific"] += to_string(g_device->readStatusMfrSpecific());
+            param.val = to_string(g_device->readStatusMfrSpecific());
         } catch (const exception& ex) {
-            values["status_mfr_specific"] += "ERROR";
+            param.val = "ERROR";
             errors.push_back(std::string{"readStatusMfrSpecific() error: "} + ex.what()); 
         }
         // readStatusFans_1_2() = 0;
+        param.name="status_fans_1_2";
         try {
-            values["status_fans_1_2"] += to_string(g_device->readStatusFans_1_2());
+            param.val = to_string(g_device->readStatusFans_1_2());
         } catch (const exception& ex) {
-            values["status_fans_1_2"] += "ERROR";
+            param.val = "ERROR";
             errors.push_back(std::string{"readStatusFans_1_2() error: "} + ex.what()); 
         }
         // virtual float readIoutOvercurrent() = 0;
+        param.name="status_iout_oc";
         try {
-            values["status_iout_oc"] += to_string(g_device->readIoutOvercurrent());
+            param.val = to_string(g_device->readIoutOvercurrent());
         } catch (const exception& ex) {
-            values["status_iout_oc"] += "ERROR";
+            param.val = "ERROR";
             errors.push_back(std::string{"readIoutOvercurrent() error: "} + ex.what()); 
         }
 
         g_output = string{"{"} + R"("values": {)"; 
         size_t counter = 0;
         for (const auto& v: values) {
-            g_output += R"(")" + v.first + R"(":")" + v.second + R"(")";
+            g_output += R"(")" + v.name + R"(":")" + v.val + R"(")";
             counter++;
             if (counter < values.size())
                 g_output += ",";

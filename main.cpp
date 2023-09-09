@@ -25,9 +25,7 @@
 #include "lwipopts.h"
 
 #include "ssi.h"
-
-#define WIFI_SSID "MTT"
-#define WIFI_PASSWORD "pass1234"
+#include "creds.h"
 
 #define DEBUG_printf printf
 
@@ -86,6 +84,7 @@ int main() {
     cyw43_arch_enable_sta_mode();
 
     // Connect to the WiFI network - loop until connected
+    // WIFI_SSID and WIFI_PASSWORD come from creds.h
     while(cyw43_arch_wifi_connect_timeout_ms(WIFI_SSID, WIFI_PASSWORD, CYW43_AUTH_WPA2_AES_PSK, 30000) != 0){
         printf("Attempting to connect...\n");
     }
