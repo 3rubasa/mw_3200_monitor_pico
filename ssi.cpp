@@ -51,6 +51,7 @@ u16_t ssi_handler(int iIndex, char *pcInsert, int iInsertLen, u16_t part, u16_t*
             param.val = "ERROR";
             errors.push_back(std::string{"readVout() error: "} + ex.what()); 
         }
+        values.push_back(param);
         // readIout()
         param.name="iout";
         try {
@@ -59,6 +60,7 @@ u16_t ssi_handler(int iIndex, char *pcInsert, int iInsertLen, u16_t part, u16_t*
             param.val = "ERROR";
             errors.push_back(std::string{"readIout() error: "} + ex.what()); 
         }
+        values.push_back(param);
         // readTemp1()
         param.name="temp1";
         try {
@@ -67,6 +69,7 @@ u16_t ssi_handler(int iIndex, char *pcInsert, int iInsertLen, u16_t part, u16_t*
             param.val = "ERROR";
             errors.push_back(std::string{"readTemp1() error: "} + ex.what()); 
         }
+        values.push_back(param);
         // readFanSpeed1()
         param.name="fan1";
         try {
@@ -75,6 +78,7 @@ u16_t ssi_handler(int iIndex, char *pcInsert, int iInsertLen, u16_t part, u16_t*
             param.val = "ERROR";
             errors.push_back(std::string{"readFanSpeed1() error: "} + ex.what()); 
         }
+        values.push_back(param);
         // readFanSpeed2()
         param.name="fan2";
         try {
@@ -83,6 +87,7 @@ u16_t ssi_handler(int iIndex, char *pcInsert, int iInsertLen, u16_t part, u16_t*
             param.val = "ERROR";
             errors.push_back(std::string{"readFanSpeed2() error: "} + ex.what()); 
         }
+        values.push_back(param);
         // readStatusWord() = 0;
         param.name="status_word";
         try {
@@ -91,6 +96,7 @@ u16_t ssi_handler(int iIndex, char *pcInsert, int iInsertLen, u16_t part, u16_t*
             param.val = "ERROR";
             errors.push_back(std::string{"readStatusWord() error: "} + ex.what()); 
         }
+        values.push_back(param);
         // readStatusVout() = 0;
         param.name="status_vout";
         try {
@@ -99,6 +105,7 @@ u16_t ssi_handler(int iIndex, char *pcInsert, int iInsertLen, u16_t part, u16_t*
             param.val = "ERROR";
             errors.push_back(std::string{"readStatusVout() error: "} + ex.what()); 
         }
+        values.push_back(param);
         // readStatusIout() = 0;
         param.name="status_iout";
         try {
@@ -107,6 +114,7 @@ u16_t ssi_handler(int iIndex, char *pcInsert, int iInsertLen, u16_t part, u16_t*
             param.val = "ERROR";
             errors.push_back(std::string{"readStatusIout() error: "} + ex.what()); 
         }
+        values.push_back(param);
         // readStatusInput() = 0;
         param.name="status_input";
         try {
@@ -115,6 +123,7 @@ u16_t ssi_handler(int iIndex, char *pcInsert, int iInsertLen, u16_t part, u16_t*
             param.val = "ERROR";
             errors.push_back(std::string{"readStatusInput() error: "} + ex.what()); 
         }
+        values.push_back(param);
         // readStatusTemp() = 0;
         param.name="status_temp";
         try {
@@ -123,6 +132,7 @@ u16_t ssi_handler(int iIndex, char *pcInsert, int iInsertLen, u16_t part, u16_t*
             param.val = "ERROR";
             errors.push_back(std::string{"readStatusTemp() error: "} + ex.what()); 
         }
+        values.push_back(param);
         // readStatusCml() = 0;
         param.name="status_cml";
         try {
@@ -131,6 +141,7 @@ u16_t ssi_handler(int iIndex, char *pcInsert, int iInsertLen, u16_t part, u16_t*
             param.val = "ERROR";
             errors.push_back(std::string{"readStatusCml() error: "} + ex.what()); 
         }
+        values.push_back(param);
         // readStatusMfrSpecific() = 0;
         param.name="status_mfr_specific";
         try {
@@ -139,6 +150,7 @@ u16_t ssi_handler(int iIndex, char *pcInsert, int iInsertLen, u16_t part, u16_t*
             param.val = "ERROR";
             errors.push_back(std::string{"readStatusMfrSpecific() error: "} + ex.what()); 
         }
+        values.push_back(param);
         // readStatusFans_1_2() = 0;
         param.name="status_fans_1_2";
         try {
@@ -147,6 +159,7 @@ u16_t ssi_handler(int iIndex, char *pcInsert, int iInsertLen, u16_t part, u16_t*
             param.val = "ERROR";
             errors.push_back(std::string{"readStatusFans_1_2() error: "} + ex.what()); 
         }
+        values.push_back(param);
         // virtual float readIoutOvercurrent() = 0;
         param.name="status_iout_oc";
         try {
@@ -155,6 +168,7 @@ u16_t ssi_handler(int iIndex, char *pcInsert, int iInsertLen, u16_t part, u16_t*
             param.val = "ERROR";
             errors.push_back(std::string{"readIoutOvercurrent() error: "} + ex.what()); 
         }
+        values.push_back(param);
 
         g_output = string{"{"} + R"("values": {)"; 
         size_t counter = 0;

@@ -32,8 +32,8 @@ uint8_t ReadByte(uint8_t command) {
         errss << "Writing command 0x" << std::hex << (int)command << 
             " to device 0x" << std::hex << DEVICE_ADDRESS << 
             " on bus 0x" << std::hex << I2C_BUS->hw << 
-            " failed with ret value = " << ret << std::endl;
-        std::cout << errss.str();
+            " failed with ret value = " << ret;
+        std::cout << errss.str() << std::endl;
         throw std::runtime_error(errss.str().c_str());
     }
 
@@ -43,8 +43,8 @@ uint8_t ReadByte(uint8_t command) {
         errss << "Reading " << sizeof(result) << " bytes response to command 0x" << std::hex << (int)command << 
             " from device 0x" << std::hex << DEVICE_ADDRESS << 
             " on bus 0x" << std::hex << I2C_BUS->hw << 
-            " failed with ret value = " << ret << std::endl;
-        std::cout << errss.str();
+            " failed with ret value = " << ret;
+        std::cout << errss.str() << std::endl;
         throw std::runtime_error(errss.str().c_str());
     }
 
@@ -64,9 +64,9 @@ uint16_t ReadWord(uint8_t command) {
         errss << "Writing command 0x" << std::hex << (int)command << 
             " to device 0x" << std::hex << DEVICE_ADDRESS << 
             " on bus 0x" << std::hex << I2C_BUS->hw << 
-            " failed with ret value = " << ret << std::endl;
+            " failed with ret value = " << ret;
 
-        std::cout << errss.str();
+        std::cout << errss.str() << std::endl;
         throw std::runtime_error(errss.str().c_str());
     }
 
@@ -78,9 +78,9 @@ uint16_t ReadWord(uint8_t command) {
         errss << "Reading " << sizeof(result) << " bytes response to command 0x" << std::hex << (int)command << 
             " from device 0x" << std::hex << DEVICE_ADDRESS << 
             " on bus 0x" << std::hex << I2C_BUS->hw << 
-            " failed with ret value = " << ret << std::endl;
+            " failed with ret value = " << ret;
 
-        std::cout << errss.str();
+        std::cout << errss.str() << std::endl;
         throw std::runtime_error(errss.str().c_str());
     }
 
