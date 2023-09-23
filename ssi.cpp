@@ -11,7 +11,7 @@
 
 using namespace std;
 
-shared_ptr<IDevice> g_device;
+shared_ptr<IMWPBU3200Device> g_device;
 string g_output;
 
 // SSI tags - tag length limited to 8 bytes by default
@@ -208,7 +208,7 @@ u16_t ssi_handler(int iIndex, char *pcInsert, int iInsertLen, u16_t part, u16_t*
 }
 
 // Initialise the SSI handler
-void ssi_init(shared_ptr<IDevice> device) {
+void ssi_init(shared_ptr<IMWPBU3200Device> device) {
     g_device=device;
     http_set_ssi_handler(ssi_handler, ssi_tags, LWIP_ARRAYSIZE(ssi_tags));
 }

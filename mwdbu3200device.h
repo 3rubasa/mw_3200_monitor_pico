@@ -1,9 +1,11 @@
 #pragma once
 #include <cstdint>
 #include "interfaces.h"
+#include <memory>
 
-class Device : public IDevice {
+class MWPBU3200Device : public IMWPBU3200Device {
 public:
+    MWPBU3200Device(std::shared_ptr<II2CNode> i2cNode);
     virtual float readVin() override;
     virtual float readVout() override;
     virtual float readIout() override;
@@ -19,4 +21,7 @@ public:
     virtual uint8_t readStatusMfrSpecific() override;
     virtual uint8_t readStatusFans_1_2() override;
     virtual float readIoutOvercurrent() override;
+
+private:
+    std::shared_ptr<II2CNode> m_i2cNode;
 };

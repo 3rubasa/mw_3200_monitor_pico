@@ -8,4 +8,4 @@
 
 u16_t ssi_handler(int iIndex, char *pcInsert, int iInsertLen, u16_t part, u16_t* next_part);
 // Initialise the SSI handler
-void ssi_init(std::shared_ptr<IDevice> device);
+void ssi_init(std::shared_ptr<IMWPBU3200Device> device);

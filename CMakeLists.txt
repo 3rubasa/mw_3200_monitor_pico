@@ -43,9 +43,10 @@ if (PICO_CYW43_SUPPORTED) # set by PICO_BOARD=pico_w
 
         add_executable(${APP_NAME}
             main.cpp
-            i2c.cpp
+            i2cnode.cpp
             conversions.cpp
-            device.cpp
+            mwdbu3200device.cpp
+            pcf8591device.cpp
             ssi.cpp
         )
 
