@@ -48,6 +48,8 @@ if (PICO_CYW43_SUPPORTED) # set by PICO_BOARD=pico_w
             mwdbu3200device.cpp
             pcf8591device.cpp
             ssi.cpp
+            SonoffMiniR2Detector.cpp
+            tcpclient.c
         )
 
         target_link_libraries(${APP_NAME}
