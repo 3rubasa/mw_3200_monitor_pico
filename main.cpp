@@ -17,12 +17,8 @@
 #include "hardware/gpio.h"
 #include "hardware/adc.h"
 #include "pico/cyw43_arch.h"
-#include "lwip/apps/mqtt_priv.h"
-#include "tusb.h"
 
 #include "lwip/apps/httpd.h"
-#include "pico/stdlib.h"
-#include "pico/cyw43_arch.h"
 #include "lwipopts.h"
 
 #include "ssi.h"
