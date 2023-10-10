@@ -98,8 +98,6 @@ void I2CNode::WriteByte(uint8_t regAddr, uint8_t val) {
     output[0] = regAddr;
     output[1] = val;
 
-    uint8_t result = 0;
-
     int ret = i2c_write_blocking (m_bus, m_address, output, 2, true);
     printf("Writing result: %d \n", ret);
     if (ret < 2) {
@@ -111,18 +109,4 @@ void I2CNode::WriteByte(uint8_t regAddr, uint8_t val) {
         std::cout << errss.str() << std::endl;
         throw std::runtime_error(errss.str().c_str());
     }
-
-    // int ret = i2c_write_blocking (m_bus, m_address, &val, sizeof(val), true);
-    // //printf("Writing result: %d \n", ret);
-    // if (ret < (int)sizeof(val)) {
-    //     std::stringstream errss;
-    //     errss << "Writing byte 0x" << std::hex << (int)val << 
-    //         " to device 0x" << std::hex << m_address << 
-    //         " on bus 0x" << std::hex << m_bus->hw << 
-    //         " failed with ret value = " << ret;
-    //     std::cout << errss.str() << std::endl;
-    //     throw std::runtime_error(errss.str().c_str());
-    // }
-
-    //printf("RESULT=%d", result);
 }

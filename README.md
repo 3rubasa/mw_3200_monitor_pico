@@ -1,5 +1,5 @@
-# mw_3200_controller_pico
-Mean Well 3200 charger PMBus controller/monitor
+# mw_3200_monitor_pico
+Mean Well DBU 3200 charger PMBus monitor
 
 How to build on Windows:
 1. Open VS 2022 developer command prompt "x64 Native Tools Command Prompt 2022"

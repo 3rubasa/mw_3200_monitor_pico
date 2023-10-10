@@ -5,8 +5,8 @@ include(pico_sdk_import.cmake)
 
 include(pico_extras_import_optional.cmake)
 
-project(mw_3200_controller_pico C CXX ASM)
-set(APP_NAME mw3200)
+project(mw_3200_monitor_pico C CXX ASM)
+set(APP_NAME mw3200_monitor)
 set(PICO_BOARD pico_w)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
@@ -46,22 +46,23 @@ if (PICO_CYW43_SUPPORTED) # set by PICO_BOARD=pico_w
             i2cnode.cpp
             conversions.cpp
             mwdbu3200device.cpp
-            pcf8591device.cpp
-            ssi.cpp
-            SonoffMiniR2Detector.cpp
-            tcpclient.c
+            getstatehandler.cpp
+            ../mw_tools/src/core.cpp
+            ../mw_tools/src/wifi.cpp
+            ../mw_tools/src/ssiserver.cpp
+            ../mw_tools/src/sync.cpp
         )
 
         target_link_libraries(${APP_NAME}
             pico_stdlib              # for core functionality
             hardware_i2c
-            hardware_adc
             pico_cyw43_arch_lwip_threadsafe_background
             pico_lwip_http
         )
 
         target_include_directories(${APP_NAME} PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
+        ${CMAKE_CURRENT_LIST_DIR}/../mw_tools
         )
 
         # create map/bin/hex file etc.

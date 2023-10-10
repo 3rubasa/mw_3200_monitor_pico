@@ -27,9 +27,3 @@ class IMWPBU3200Device {
     virtual uint8_t readStatusFans_1_2() = 0;
     virtual float readIoutOvercurrent() = 0;
 };
-
-class ICPF8591Device {
-    public:
-    virtual float readVoltage() = 0;
-    virtual void writeVoltage(float voltage) = 0;
-};

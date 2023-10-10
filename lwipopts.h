@@ -83,13 +83,54 @@
 #define SLIP_DEBUG                  LWIP_DBG_OFF
 #define DHCP_DEBUG                  LWIP_DBG_OFF
 
+//#include "mw_tools_lwipopts.h"
+
+#ifndef LWIP_HTTPD_FILE_STATE
+#define LWIP_HTTPD_FILE_STATE 1
+#endif 
+
+#ifndef LWIP_HTTPD
+#define LWIP_HTTPD 1
+#endif
+
+// #ifndef LWIP_HTTPD_CGI
+// #define LWIP_HTTPD_CGI 1
+// #endif
+
+#ifndef HTTPD_FSDATA_FILE
+#define HTTPD_FSDATA_FILE "htmldata.c"
+#endif 
+
+#ifndef LWIP_HTTPD_SSI_MULTIPART
+#define LWIP_HTTPD_SSI_MULTIPART 1
+#endif
+
+#ifndef LWIP_HTTPD_SSI
+#define LWIP_HTTPD_SSI 1
+#endif
+
+#ifndef LWIP_HTTPD_SSI_INCLUDE_TAG
+#define LWIP_HTTPD_SSI_INCLUDE_TAG 0
+#endif
+
+//#ifndef LWIP_HTTPD_MAX_TAG_INSERT_LEN
+#define LWIP_HTTPD_MAX_TAG_INSERT_LEN 192
+//#endif
+
+//#ifndef LWIP_HTTPD_SUPPORT_POST
+#define LWIP_HTTPD_SUPPORT_POST   0
+//#endif
+
+//#define LWIP_HTTPD_SSI_RAW 1
+
 // This section enables HTTPD server with SSI, SGI
 // and tells server which converted HTML files to use
-#define LWIP_HTTPD 1
-#define LWIP_HTTPD_SSI 1
-#define LWIP_HTTPD_CGI 1
-#define LWIP_HTTPD_SSI_INCLUDE_TAG 0
-#define HTTPD_FSDATA_FILE "htmldata.c"
-#define LWIP_HTTPD_SSI_MULTIPART 1
+//#define LWIP_HTTPD 1
+//#define LWIP_HTTPD_SSI 1
+//#define LWIP_HTTPD_CGI 1
+//#define LWIP_HTTPD_SSI_INCLUDE_TAG 0
+//#define LWIP_HTTPD_SUPPORT_POST   0
+//#define HTTPD_FSDATA_FILE "htmldata.c"
+//#define LWIP_HTTPD_SSI_MULTIPART 1
 // TOOD
 //#define PICO_CYW43_ARCH_DEFAULT_COUNTRY_CODE CYW43_COUNTRY('U', 'A', 0)
